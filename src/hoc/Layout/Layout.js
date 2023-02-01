@@ -11,7 +11,7 @@ const Layout = (props) => {
       <Fragment>
         <NavigationBar />
         {children}
-        <Footer />
+        {/* <Footer /> */}
       </Fragment>
     </>
   );

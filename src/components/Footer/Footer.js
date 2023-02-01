@@ -5,7 +5,7 @@ import './Footer.scss';
 const Footer = (props) => {
   return (
     <div className='Footer'>
-      <div className='footerContainer'>Footer</div>
+      <div className='footerContainer'></div>
     </div>
   );
 };
