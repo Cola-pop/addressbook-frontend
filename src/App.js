@@ -8,13 +8,14 @@ import Layout from './hoc/Layout/Layout';
 const App = (props) => {
   return (
     <div className='App'>
-      <Layout>
-        <Router>
+      <Router>
+        <Layout>
           <Routes>
             <Route path='/' element={<Home />} />
+            <Route path='/home' element={<Home />} />
           </Routes>
-        </Router>
-      </Layout>
+        </Layout>
+      </Router>
     </div>
   );
 };

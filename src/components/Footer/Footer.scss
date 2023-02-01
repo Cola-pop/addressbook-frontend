@@ -1,0 +1,40 @@
+.Footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  background-color: #3f51b5;
+  color: #fff;
+  font-size: 14px;
+  margin-top: 25px;
+
+  &.makeFooterSticky {
+    @media (max-width: 500px) {
+      position: absolute;
+      bottom: 0;
+    }
+
+    @media (min-width: 960px) {
+      position: absolute;
+      bottom: 0;
+    }
+  }
+
+  .footerContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    height: 100%;
+    padding-top: 25px;
+    padding-bottom: 25px;
+
+    @media (min-width: 600px) {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+}
