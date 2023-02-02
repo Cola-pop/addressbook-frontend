@@ -125,6 +125,10 @@ const AddAddressSection = (props) => {
                 onChange={(e) => {
                   handleEmailChange(e.target.value);
                 }}
+                error={!emailIsValid && email !== ''}
+                helperText={
+                  !emailIsValid && email !== '' ? 'Invalid email.' : ''
+                }
               />
             </Grid>
           </Grid>

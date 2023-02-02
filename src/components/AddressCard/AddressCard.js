@@ -19,7 +19,7 @@ const AddressCard = (props) => {
   const [changes, setChanges] = useState(false);
   const [phone, setPhone] = useState(address.phone);
   const [email, setEmail] = useState(address.email);
-  const [emailIsValid, setEmailIsValid] = useState(false);
+  const [emailIsValid, setEmailIsValid] = useState(true);
 
   const handleEmailChange = (val) => {
     if (isEmail(val)) {
@@ -75,6 +75,8 @@ const AddressCard = (props) => {
                   setChanges(true);
                   handleEmailChange(e.target.value);
                 }}
+                error={!emailIsValid}
+                helperText={!emailIsValid ? 'Invalid email.' : ''}
               />
             </FormControl>
           </CardContent>
@@ -88,6 +90,7 @@ const AddressCard = (props) => {
                   size='small'
                   color='primary'
                   onClick={onSaveClickHandler}
+                  disabled={phone === '' || !emailIsValid}
                 >
                   Save
                 </Button>
