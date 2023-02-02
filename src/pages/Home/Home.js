@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 
 import AddAddressSection from '../../components/AddAddressSection/AddAddressSection';
 import AddressCardSection from '../../components/AddressCardSection/AddressCardSection';
 import Spinner from '../../components/Spinner/Spinner';
 import findAllAddressesAPI from '../../api/addresses/findAllAddresses';
 import './Home.scss';
+import * as actionTypes from '../../store/actions';
 
 const Home = (props) => {
+  const { onUpdateAddresses } = props;
+
   const [addresses, setAddresses] = useState([]);
   const [showSpinner, setShowSpinner] = useState(false);
 
@@ -15,6 +19,7 @@ const Home = (props) => {
       showSpinnerHandler();
       const addressesData = await findAllAddressesAPI();
       setAddresses(addressesData.data.foundAddresses);
+      onUpdateAddresses(addressesData.data.foundAddresses);
       hideSpinnerHandler();
     } catch (error) {
       console.log(error);
@@ -50,4 +55,17 @@ const Home = (props) => {
   );
 };
 
-export default Home;
+const mapStateToProps = (state) => {
+  return {
+    addresses: state.adr.addresses,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onUpdateAddresses: (addressesData) =>
+      dispatch({ type: actionTypes.ADDRESSES, addressesData: addressesData }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

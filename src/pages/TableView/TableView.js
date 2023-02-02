@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import MaterialTable from 'material-table';
+import { useSelector } from 'react-redux';
 
 const TableView = (props) => {
+  const [addresses, setAddresses] = useState(
+    useSelector((state) => state.adr.addressesData)
+  );
+
   const [columns, setColumns] = useState([
     { title: 'Name', field: 'name' },
     { title: 'Surname', field: 'surname' },
