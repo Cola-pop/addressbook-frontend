@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import AddAddressSection from '../../components/AddAddressSection/AddAddressSection';
 import AddressCardSection from '../../components/AddressCardSection/AddressCardSection';
+import EmptyAddressesSection from '../../components/EmptyAddressesSection/EmptyAddressesSection';
 import Spinner from '../../components/Spinner/Spinner';
 import findAllAddressesAPI from '../../api/addresses/findAllAddresses';
 import './Home.scss';
@@ -44,12 +45,17 @@ const Home = (props) => {
         updateData={getAddressData}
         showSpinnerHandler={showSpinnerHandler}
       />
-      <AddressCardSection
-        addresses={addresses}
-        updateData={getAddressData}
-        showSpinnerHandler={showSpinnerHandler}
-        hideSpinnerHandler={hideSpinnerHandler}
-      />
+      {addresses.length === 0 ? (
+        <EmptyAddressesSection />
+      ) : (
+        <AddressCardSection
+          addresses={addresses}
+          updateData={getAddressData}
+          showSpinnerHandler={showSpinnerHandler}
+          hideSpinnerHandler={hideSpinnerHandler}
+        />
+      )}
+
       <Spinner show={showSpinner} />
     </div>
   );
