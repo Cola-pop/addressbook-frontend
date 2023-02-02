@@ -13,7 +13,7 @@ import isEmail from 'validator/lib/isEmail';
 import addAddressAPI from '../../api/addresses/addAddress';
 
 const AddAddressSection = (props) => {
-  const { updateData } = props;
+  const { updateData, showSpinnerHandler } = props;
 
   const [firstName, setFirstName] = useState('');
   const [surname, setSurname] = useState('');
@@ -36,7 +36,9 @@ const AddAddressSection = (props) => {
 
   const saveAddressHandler = async () => {
     try {
+      showSpinnerHandler();
       await addAddressAPI({ firstName, surname, phone, email });
+
       updateData();
       setDialogOpen(false);
     } catch (error) {

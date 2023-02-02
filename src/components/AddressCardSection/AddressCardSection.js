@@ -7,11 +7,15 @@ import updateAddressAPI from '../../api/addresses/updateAddress';
 import './AddressCardSection.scss';
 
 const AddressCardSection = (props) => {
-  const { addresses, updateData } = props;
+  const { addresses, updateData, showSpinnerHandler, hideSpinnerHandler } =
+    props;
 
   const onSaveHandler = async (id, phone, email) => {
     try {
+      showSpinnerHandler();
       const updatedAddress = await updateAddressAPI(id, { phone, email });
+      hideSpinnerHandler();
+
       return updatedAddress.data.success;
     } catch (error) {
       console.log(error);
@@ -20,6 +24,7 @@ const AddressCardSection = (props) => {
 
   const onDeleteHandler = async (id) => {
     try {
+      showSpinnerHandler();
       const deletedAddress = await deleteAddressAPI(id);
 
       updateData();
