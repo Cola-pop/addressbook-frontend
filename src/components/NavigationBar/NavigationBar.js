@@ -9,6 +9,10 @@ const NavigationBar = (props) => {
       label: 'Home',
       href: '/home',
     },
+    {
+      label: 'Table View',
+      href: '/table-view',
+    },
   ];
 
   const navActionsData = [
