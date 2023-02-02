@@ -4,10 +4,10 @@ import Card from '@mui/material/Card';
 import CardActionArea from '@mui/material/CardActionArea';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
+import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@mui/material/Typography';
-import FormControl from '@material-ui/core/FormControl';
 import isEmail from 'validator/lib/isEmail';
 
 import './AddressCard.scss';
@@ -21,9 +21,7 @@ const AddressCard = (props) => {
   const [email, setEmail] = useState(address.email);
   const [emailIsValid, setEmailIsValid] = useState(false);
 
-  const handleEmailChange = (event) => {
-    const val = event.target.value;
-
+  const handleEmailChange = (val) => {
     if (isEmail(val)) {
       setEmailIsValid(true);
     } else {
@@ -31,7 +29,6 @@ const AddressCard = (props) => {
     }
 
     setEmail(val);
-    // console.log(isEmail(val));
   };
 
   const onSaveClickHandler = async () => {
@@ -76,7 +73,7 @@ const AddressCard = (props) => {
                 onChange={(e) => {
                   setWarningText('Changes unsaved!');
                   setChanges(true);
-                  handleEmailChange(e);
+                  handleEmailChange(e.target.value);
                 }}
               />
             </FormControl>
