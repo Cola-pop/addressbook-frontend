@@ -8,18 +8,20 @@ import deleteAddressAPI from '../../api/addresses/deleteAddress';
 import updateAddressAPI from '../../api/addresses/updateAddress';
 
 const TableView = (props) => {
-  const [addresses, setAddresses] = useState(
-    useSelector((state) => {
-      return state.adr.addressesData;
-    })
-  );
-
-  const [columns, setColumns] = useState([
+  const [columns] = useState([
     { title: 'Name', field: 'firstName' },
     { title: 'Surname', field: 'surname' },
     { title: 'Phone', field: 'phone' },
     { title: 'Email', field: 'email' },
   ]);
+
+  const [addresses, setAddresses] = useState(
+    useSelector((state) => state.addresses.addressesData)
+  );
+
+  const [editableAddressData] = useState(
+    addresses.map((addr) => ({ ...addr }))
+  );
 
   return (
     <Grid container spacing={2}>
@@ -31,7 +33,7 @@ const TableView = (props) => {
             exportAllData: true,
           }}
           columns={columns}
-          data={addresses}
+          data={editableAddressData}
           editable={{
             onRowAdd: (newData) =>
               new Promise((resolve, reject) => {
