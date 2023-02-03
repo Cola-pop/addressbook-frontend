@@ -9,7 +9,7 @@ import findAllAddressesAPI from '../../api/addresses/findAllAddresses';
 import './Home.scss';
 import { storeAddresses } from '../../store/slices/addresses';
 
-const Home = (props) => {
+const Home = () => {
   const dispatch = useDispatch();
 
   const [addresses, setAddresses] = useState([]);

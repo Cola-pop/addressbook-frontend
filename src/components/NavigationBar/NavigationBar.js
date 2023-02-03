@@ -17,7 +17,8 @@ const NavigationBar = (props) => {
 
   const navActionsData = [
     {
-      label: 'Login',
+      label: 'Read Me',
+      href: '/read-me',
     },
   ];
 
@@ -39,8 +40,19 @@ const NavigationBar = (props) => {
   };
 
   const getNavigationActions = () => {
-    return navActionsData.map(({ label }) => {
-      return <Button className='navAction'>{label}</Button>;
+    return navActionsData.map(({ label, href }) => {
+      return (
+        <Button
+          {...{
+            key: label,
+            to: href,
+            component: Link,
+          }}
+          className='navAction'
+        >
+          {label}
+        </Button>
+      );
     });
   };
 

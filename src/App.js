@@ -4,6 +4,7 @@ import './App.css';
 
 import Home from './pages/Home/Home';
 import Layout from './hoc/Layout/Layout';
+import ReadMe from './pages/ReadMe/ReadMe';
 import TableView from './pages/TableView/TableView';
 
 const App = (props) => {
@@ -14,6 +15,7 @@ const App = (props) => {
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/home' element={<Home />} />
+            <Route path='read-me' element={<ReadMe />} />
             <Route path='/table-view' element={<TableView />} />
           </Routes>
         </Layout>
