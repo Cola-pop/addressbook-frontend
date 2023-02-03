@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import AddAddressSection from '../../components/AddAddressSection/AddAddressSection';
 import AddressCardSection from '../../components/AddressCardSection/AddressCardSection';
@@ -7,10 +7,10 @@ import EmptyAddressesSection from '../../components/EmptyAddressesSection/EmptyA
 import Spinner from '../../components/Spinner/Spinner';
 import findAllAddressesAPI from '../../api/addresses/findAllAddresses';
 import './Home.scss';
-import * as actionTypes from '../../store/actions';
+import { storeAddresses } from '../../store/slices/addresses';
 
 const Home = (props) => {
-  const { onUpdateAddresses } = props;
+  const dispatch = useDispatch();
 
   const [addresses, setAddresses] = useState([]);
   const [showSpinner, setShowSpinner] = useState(false);
@@ -20,7 +20,8 @@ const Home = (props) => {
       showSpinnerHandler();
       const addressesData = await findAllAddressesAPI();
       setAddresses(addressesData.data.foundAddresses);
-      onUpdateAddresses(addressesData.data.foundAddresses);
+
+      dispatch(storeAddresses(addressesData.data.foundAddresses));
       hideSpinnerHandler();
     } catch (error) {
       console.log(error);
@@ -61,17 +62,4 @@ const Home = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    addresses: state.adr.addresses,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onUpdateAddresses: (addressesData) =>
-      dispatch({ type: actionTypes.ADDRESSES, addressesData: addressesData }),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default Home;

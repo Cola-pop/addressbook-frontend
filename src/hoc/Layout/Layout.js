@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 
 import NavigationBar from '../../components/NavigationBar/NavigationBar';
-import Footer from '../../components/Footer/Footer';
+// import Footer from '../../components/Footer/Footer';
 
 const Layout = (props) => {
   const { children } = props;
