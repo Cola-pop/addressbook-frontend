@@ -32,7 +32,12 @@ const AddressCard = (props) => {
   };
 
   const onSaveClickHandler = async () => {
-    const isSaved = await saveAddress(address._id, phone, email);
+    const isSaved = await saveAddress(address._id, {
+      firstName: address.firstName,
+      surname: address.surname,
+      phone,
+      email,
+    });
 
     if (isSaved) {
       setWarningText('Everything up to date');

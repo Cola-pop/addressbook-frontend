@@ -10,12 +10,13 @@ const AddressCardSection = (props) => {
   const { addresses, updateData, showSpinnerHandler, hideSpinnerHandler } =
     props;
 
-  const onSaveHandler = async (id, phone, email) => {
+  const onSaveHandler = async (id, newAddressData) => {
     try {
       showSpinnerHandler();
-      const updatedAddress = await updateAddressAPI(id, { phone, email });
+      const updatedAddress = await updateAddressAPI(id, newAddressData);
       hideSpinnerHandler();
 
+      updateData();
       return updatedAddress.data.success;
     } catch (error) {
       console.log(error);

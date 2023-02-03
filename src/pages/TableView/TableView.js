@@ -19,7 +19,7 @@ const TableView = (props) => {
     useSelector((state) => state.addresses.addressesData)
   );
 
-  const [editableAddressData] = useState(
+  const [editableAddressData, setEditableAddressData] = useState(
     addresses.map((addr) => ({ ...addr }))
   );
 
@@ -38,7 +38,7 @@ const TableView = (props) => {
             onRowAdd: (newData) =>
               new Promise((resolve, reject) => {
                 setTimeout(() => {
-                  setAddresses([...addresses, newData]);
+                  setEditableAddressData([...editableAddressData, newData]);
                   addAddressAPI(newData);
 
                   resolve();
@@ -47,11 +47,12 @@ const TableView = (props) => {
             onRowUpdate: (newData, oldData) =>
               new Promise((resolve, reject) => {
                 setTimeout(() => {
-                  const dataUpdate = [...addresses];
+                  const dataUpdate = [...editableAddressData];
                   const index = oldData.tableData.id;
-                  updateAddressAPI(dataUpdate[index]._id, dataUpdate[index]);
+
+                  updateAddressAPI(dataUpdate[index]._id, newData);
                   dataUpdate[index] = newData;
-                  setAddresses([...dataUpdate]);
+                  setEditableAddressData([...dataUpdate]);
 
                   resolve();
                 }, 1000);
@@ -59,11 +60,12 @@ const TableView = (props) => {
             onRowDelete: (oldData) =>
               new Promise((resolve, reject) => {
                 setTimeout(() => {
-                  const dataDelete = [...addresses];
+                  const dataDelete = [...editableAddressData];
                   const index = oldData.tableData.id;
+
                   deleteAddressAPI(dataDelete[index]._id);
                   dataDelete.splice(index, 1);
-                  setAddresses([...dataDelete]);
+                  setEditableAddressData([...dataDelete]);
 
                   resolve();
                 }, 1000);
